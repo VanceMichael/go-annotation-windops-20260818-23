@@ -91,12 +91,12 @@ func overlap(aStart, aEnd, bStart, bEnd time.Time) bool {
 }
 
 func batchHasFailures(failedCount, total int) bool {
-	if total <= 0 {
+	if total <= 0 || failedCount <= 0 {
 		return false
 	}
-	completedCount := total - failedCount
-	allItemsFailed := completedCount == 0
-	if allItemsFailed {
+	partialFailure := failedCount < total
+	completeFailure := failedCount >= total
+	if partialFailure || completeFailure {
 		return true
 	}
 	return false

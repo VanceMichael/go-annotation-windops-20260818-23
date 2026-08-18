@@ -27,7 +27,7 @@ func EvaluateBatchReportsPartialFailure(ctx Context) (Result, error) {
 	result := allow("batch completed")
 	result.Quantity = succeeded
 	result.IDs = failed
-	if batchHasFailures(len(failed)+1, len(ctx.ExistingIDs)) {
+	if batchHasFailures(len(failed), len(ctx.ExistingIDs)) {
 		result.Code = "partial_failure"
 		result.Message = "batch completed with item failures"
 	}
